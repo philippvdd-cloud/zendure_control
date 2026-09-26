@@ -1,0 +1,98 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Zendure Control",
+        "description": "Takes over the control of the devices of the Zendure integration. Set the operation of the Zendure Manager there to 'Off'.",
+        "data": {
+          "p1_sensor": "Grid power sensor",
+          "command_mode": "Command path"
+        },
+        "data_description": {
+          "p1_sensor": "Grid power in W or kW, positive = import, negative = export (e.g. Ecotracker).",
+          "command_mode": "Automatic: commands through the Zendure integration internally (fast, flash friendly), otherwise through its limit entities."
+        }
+      }
+    },
+    "abort": {
+      "no_source": "The Zendure integration (zendure_ha) is not set up.",
+      "already_configured": "Zendure Control is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Zendure Control",
+        "data": {
+          "p1_sensor": "Grid power sensor",
+          "command_mode": "Command path",
+          "excluded_devices": "Do not control"
+        },
+        "data_description": {
+          "p1_sensor": "Grid power in W or kW, positive = import, negative = export (e.g. Ecotracker).",
+          "command_mode": "Automatic: commands through the Zendure integration internally (fast, flash friendly), otherwise through its limit entities.",
+          "excluded_devices": "These devices are left alone."
+        }
+      }
+    }
+  },
+  "selector": {
+    "command_mode": {
+      "options": {
+        "auto": "Automatic",
+        "driver": "Zendure integration internal",
+        "entities": "Entities only (output/input limit)"
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "active": {
+        "name": "Control active"
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Mode",
+        "state": {
+          "nulleinspeisung": "Zero export",
+          "nur_entladen": "Discharge only",
+          "nur_laden": "Charge only (solar surplus)"
+        }
+      }
+    },
+    "number": {
+      "target_power": {
+        "name": "Target grid power"
+      }
+    },
+    "sensor": {
+      "demand": {
+        "name": "Total setpoint"
+      },
+      "grid_power": {
+        "name": "Grid power"
+      },
+      "decision": {
+        "name": "Last decision"
+      },
+      "requested_power": {
+        "name": "{device} requested"
+      },
+      "device_status": {
+        "name": "{device} status"
+      }
+    },
+    "binary_sensor": {
+      "p1_stale": {
+        "name": "Grid sensor stale"
+      },
+      "blocked": {
+        "name": "Blocked by Zendure Manager"
+      },
+      "not_following": {
+        "name": "{device} not following"
+      }
+    }
+  }
+}

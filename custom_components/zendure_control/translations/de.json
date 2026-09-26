@@ -1,0 +1,98 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Zendure Regelung",
+        "description": "Übernimmt die Regelung der Geräte aus der Zendure-Integration. Stelle dort den Betriebsmodus des Zendure Managers auf 'Aus'.",
+        "data": {
+          "p1_sensor": "Netzleistungs-Sensor",
+          "command_mode": "Befehlsweg"
+        },
+        "data_description": {
+          "p1_sensor": "Sensor der Netzleistung in W oder kW, positiv = Bezug, negativ = Einspeisung (z. B. Ecotracker).",
+          "command_mode": "Automatisch: Befehle über die Zendure-Integration intern (schnell, flash-schonend), sonst über deren Regler-Entitäten."
+        }
+      }
+    },
+    "abort": {
+      "no_source": "Die Zendure-Integration (zendure_ha) ist nicht eingerichtet.",
+      "already_configured": "Zendure Regelung ist bereits eingerichtet."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Zendure Regelung",
+        "data": {
+          "p1_sensor": "Netzleistungs-Sensor",
+          "command_mode": "Befehlsweg",
+          "excluded_devices": "Nicht regeln"
+        },
+        "data_description": {
+          "p1_sensor": "Sensor der Netzleistung in W oder kW, positiv = Bezug, negativ = Einspeisung (z. B. Ecotracker).",
+          "command_mode": "Automatisch: Befehle über die Zendure-Integration intern (schnell, flash-schonend), sonst über deren Regler-Entitäten.",
+          "excluded_devices": "Diese Geräte werden von der Regelung nicht angefasst."
+        }
+      }
+    }
+  },
+  "selector": {
+    "command_mode": {
+      "options": {
+        "auto": "Automatisch",
+        "driver": "Zendure-Integration intern",
+        "entities": "Nur Entitäten (Ausgangs-/Eingangsgrenze)"
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "active": {
+        "name": "Regelung aktiv"
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Modus",
+        "state": {
+          "nulleinspeisung": "Nulleinspeisung",
+          "nur_entladen": "Nur entladen",
+          "nur_laden": "Nur laden (PV-Überschuss)"
+        }
+      }
+    },
+    "number": {
+      "target_power": {
+        "name": "Ziel-Netzleistung"
+      }
+    },
+    "sensor": {
+      "demand": {
+        "name": "Sollleistung gesamt"
+      },
+      "grid_power": {
+        "name": "Netzleistung"
+      },
+      "decision": {
+        "name": "Letzte Entscheidung"
+      },
+      "requested_power": {
+        "name": "{device} angefordert"
+      },
+      "device_status": {
+        "name": "{device} Status"
+      }
+    },
+    "binary_sensor": {
+      "p1_stale": {
+        "name": "Netzsensor veraltet"
+      },
+      "blocked": {
+        "name": "Blockiert durch Zendure Manager"
+      },
+      "not_following": {
+        "name": "{device} folgt Befehl nicht"
+      }
+    }
+  }
+}
